@@ -1,0 +1,83 @@
+display:
+  width: 320
+  height: 240
+  rotation: 0
+  driver: st7789
+  spi_port: 0
+  spi_device: 0
+  DC: 17
+  RST: 27
+  BL: 22
+  BL_invert: False
+server:
+  host: http://127.0.0.1:1234
+widgets:
+  network:
+    interfaces:
+      - interface: wlan0
+        icon: wifi
+      - interface: eth0
+        icon: ethernet
+      - interface: lo
+        icon: network-wired
+  relay:
+    - name: roof_pump
+      label: Dak pomp
+      states:
+        ON:
+          icon: arrows-rotate
+          color: rgb(0, 255, 0)
+          rotating: true
+          speed: 1
+        OFF:
+          icon: power-off
+          color: rgb(255, 0, 0)
+          rotating: false
+    - name: radiator_pump
+      label: CV pomp
+      states:
+        ON:
+          icon: arrows-rotate
+          color: rgb(0, 255, 0)
+          rotating: true
+          speed: 1
+        OFF:
+          icon: power-off
+          color: rgb(255, 0, 0)
+          rotating: false
+    - name: valve1
+      label: Klep 1
+      states:
+        OFF:
+          icon: circle-left
+          color: rgb(255, 255, 0)
+        ON:
+          icon: circle-right
+          color: rgb(0, 255, 255)
+    - name: valve2
+      label: Klep 2
+      states:
+        OFF:
+          icon: circle-left
+          color: rgb(255, 255, 0)
+        ON:
+          icon: circle-right
+          color: rgb(0, 255, 255)
+    - name: blinds1
+      label: Rolluik 1
+      states:
+        OFF:
+          icon: circle-down
+          color: rgb(255, 0, 0)
+        ON:
+          icon: circle-up
+          color: rgb(0, 255, 0)
+    - name: blinds2
+      label: Rolluik 2
+      states:
+        OFF:
+          icon: circle-down
+          color: rgb(255, 0, 0)
+        ON:
+          icon: circle-up
+          color: rgb(0, 255, 0)

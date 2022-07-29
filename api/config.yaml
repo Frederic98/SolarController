@@ -1,0 +1,59 @@
+temperature:
+  0:
+    name: roof
+    friendly_name: Dak
+  1:
+    name: primary_top
+    friendly_name: Vat 1 boven
+  2:
+    name: primary_bottom
+    friendly_name: Vat 1 onder
+  3:
+    name: secondary_top
+    friendly_name: Vat 2 boven
+  4:
+    name: secondary_bottom
+    friendly_name: Vat 2 onder
+
+relay:
+  0:
+    name: pump_roof
+    friendly_name: Dak pomp
+    states:
+      ON: Aan
+      OFF: Uit
+  1:
+    name: pump_circulation
+    friendly_name: CV pomp
+    states:
+      ON: Aan
+      OFF: Uit
+  2:
+    name: valve_1
+    friendly_name: Klep 1
+    states:
+      ON: Vat 2
+      OFF: Vat 1
+  3:
+    name: valve_2
+    friendly_name: Klep 2
+    states:
+      ON: Vat 2
+      OFF: Vat 1
+
+pwm:
+  0:
+    name: pump_roof
+    friendly_name: Dak pomp
+    min: 15
+    max: 92
+
+system:
+  http:
+    address: 0.0.0.0
+    port: 1234
+    post_localhost_only: False
+  serial:
+    port: /dev/ttyS0
+#    port: socket://127.0.0.1:5000
+    baudrate: 9600

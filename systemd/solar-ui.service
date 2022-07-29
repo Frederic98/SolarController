@@ -1,0 +1,15 @@
+[Unit]
+Description=Solar Controller - UI
+After=solar-api.service
+StartLimitIntervalSec=0s
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=controller
+WorkingDirectory=/home/controller/SolarController/ui
+ExecStart=python ui.py
+
+[Install]
+WantedBy=multi-user.target

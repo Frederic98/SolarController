@@ -1,0 +1,14 @@
+[Unit]
+Description=Solar Controller - API
+StartLimitIntervalSec=0s
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=controller
+WorkingDirectory=/home/controller/SolarController/api
+ExecStart=python server.py
+
+[Install]
+WantedBy=multi-user.target

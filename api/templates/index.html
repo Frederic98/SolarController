@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar Controller</title>
+    <script>
+        function api_request(path=""){
+            let request = new XMLHttpRequest();
+            let url = location.origin + "/" + path
+            request.open("GET", url, false);
+            request.send(null);
+            return JSON.parse(request.responseText);
+        }
+        function appendTD(row, classname){
+            if(Array.isArray(classname)){
+                classname.forEach(function(clsname){appendTD(row, clsname)})
+            }else {
+                cell = document.createElement("td");
+                cell.setAttribute("class", classname)
+                // cell.appendChild(document.createTextNode(txt));
+                row.appendChild(cell);
+            }
+        }
+        function update(){
+            let data = api_request();
+            data['temperature'].forEach(function(val, idx){
+                id = "TEMPERATURE_" + val["name"];
+                row = document.getElementById(id);
+                if(row === null){
+                    row = document.createElement("tr");
+                    row.setAttribute("id", id);
+                    appendTD(row, ["index", "name", "value", "state"]);
+                    document.getElementById("temperatures").appendChild(row);
+                }
+                row.getElementsByClassName("index")[0].innerText = String(idx);
+                row.getElementsByClassName("name")[0].innerText = val["friendly_name"];
+                row.getElementsByClassName("value")[0].innerText = String(val["value"]) + val["unit"];
+                row.getElementsByClassName("state")[0].innerText = val["state"];
+            });
+            data["relay"].forEach(function(val, idx){
+                id = "RELAY_" + val["name"];
+                row = document.getElementById(id);
+                if(row === null){
+                    row = document.createElement("tr");
+                    row.setAttribute("id", id);
+                    appendTD(row, ["index", "name", "state"]);
+                    document.getElementById("relays").appendChild(row);
+                }
+                row.getElementsByClassName("index")[0].innerText = String(idx);
+                row.getElementsByClassName("name")[0].innerText = val["friendly_name"];
+                row.getElementsByClassName("state")[0].innerText = val["friendly_state"];
+            });
+        }
+        window.setInterval(update, 1000);
+    </script>
+    <style>
+        table, th, td {
+          border: 1px solid black;
+          border-collapse: collapse;
+        }
+        td{
+            padding: 0px 5px 0px;
+        }
+    </style>
+</head>
+<body>
+    <h3>Temperatures</h3>
+    <table id="temperatures">
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>Temperature</th>
+            <th>State</th>
+        </tr>
+    </table>
+    <h3>Relays</h3>
+    <table id="relays">
+        <tr>
+            <th>Index</th>
+            <th>Name</th>
+            <th>State</th>
+        </tr>
+    </table>
+</body>
+</html>

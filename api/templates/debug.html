@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Solar Controller</title>
+    <script type="text/javascript">
+        function setRelay(relay, state){
+            api_request("POST", "relay/" + relay, JSON.stringify(Boolean(state)));
+        }
+        function api_request(method="GET", path="", data=null){
+            let request = new XMLHttpRequest();
+            let url = location.origin + "/" + path
+            request.open(method, url, false);
+            request.setRequestHeader('Content-Type', 'application/json');
+            request.send(data);
+            return JSON.parse(request.responseText);
+        }
+        function setRelays(state){
+            {% for relay in relays %}
+            setRelay("{{ relay }}", state);
+            {% endfor %}
+        }
+    </script>
+</head>
+<body>
+    <h1>Relays</h1>
+    <table>
+        {% for relay in relays %}
+        <tr>
+            <td>{{ relay }}</td>
+            <td><button onclick="setRelay('{{ relay }}', true)">ON</button></td>
+            <td><button onclick="setRelay('{{ relay }}', false)">OFF</button></td>
+        </tr>
+        {% endfor %}
+        <tr>
+            <td><b>ALL</b></td>
+            <td><button onclick="setRelays(true)">ON</button></td>
+            <td><button onclick="setRelays(false)">OFF</button></td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,15 @@
+[Unit]
+Description=Solar Controller - SSH
+After=pigpiod.service
+StartLimitIntervalSec=0s
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+WorkingDirectory=/home/controller/SolarController/ssh
+ExecStart=python ssh_controller.py
+
+[Install]
+WantedBy=multi-user.target

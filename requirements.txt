@@ -1,0 +1,10 @@
+CairoSVG        #==2.5.2
+Flask           #==2.1.2
+luma.core       #==2.3.1
+luma.lcd        # @ git+https://github.com/rm-hull/luma.lcd.git@dc285328cb8621f93eb38828772123f1ce6a7f4b
+netifaces       #==0.11.0
+numpy           #==1.23.0
+Pillow          #==9.2.0
+pyserial        #==3.5
+PyYAML          #==6.0
+requests        #==2.25.1
